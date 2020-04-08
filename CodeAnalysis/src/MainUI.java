@@ -71,6 +71,11 @@ public class MainUI extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         jButton1.setText("PANAL");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         jButton2.setText("FILE UPLOAD");
@@ -163,6 +168,10 @@ public class MainUI extends javax.swing.JFrame {
             System.out.println("Open command cancelled by user.");
         }
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.err.println("PANAL");
+    }//GEN-LAST:event_jButton1ActionPerformed
     /**
      * @param args the command line arguments
      */

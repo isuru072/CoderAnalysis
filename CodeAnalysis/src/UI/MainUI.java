@@ -1,3 +1,5 @@
+package UI;
+
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -145,22 +147,20 @@ public class MainUI extends javax.swing.JFrame {
         if (rVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             System.out.println("Opening: " + file.getName());
-             try {            
+            
+            try {            
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine()) {
               String data = myReader.nextLine();
               System.out.println(data);
             }
             myReader.close();
+            
           } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
           }
-            
-            
-            
-            
-            
+              
         } else {
             System.out.println("Open command cancelled by user.");
         }

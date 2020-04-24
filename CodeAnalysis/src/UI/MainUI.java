@@ -1,6 +1,10 @@
 package UI;
 
-
+import Coupling.Coupling;
+import Coupling.CouplingMain;
+import Coupling.CustomFile;
+import function.Controller_1;
+import function.FileAnalyzer;
 import function.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,28 +32,28 @@ import javax.swing.JOptionPane;
  * @author Thushan Isuru
  */
 public class MainUI extends javax.swing.JFrame {
-
-    static String filepath;
-    
-    
-   
+  public static String filepath;
+    ArrayList <CustomFile> fileList = new ArrayList<>();
+    public FileAnalyzer analit = new FileAnalyzer();
+    Controller_1 ctrl = new Controller_1();
+    AnalyzerForm anzf = new AnalyzerForm();
+    CouplingMain cpMain;
+    FileReader read;
+    BufferedReader br;
+    File fl;
+    Coupling cp;
             
-   /**
+
+    /**
      * Creates new form MainUI
      */
     public MainUI() {
         initComponents();
         this.setLocationRelativeTo(null);
-     
-       //setExtendedState(JFrame.MAXIMIZED_BOTH);
-       
-    
+
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-    
-    
-    
-    
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,26 +65,22 @@ public class MainUI extends javax.swing.JFrame {
 
         path = new javax.swing.JTextField();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         browse = new javax.swing.JButton();
-        path1 = new javax.swing.JTextField();
+        filNameField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        name = new javax.swing.JTextField();
+        selectedPathField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        lines = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        code = new javax.swing.JTextArea();
-        TextResult = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        BtnProceed = new javax.swing.JButton();
+        CodeViewer = new javax.swing.JTextArea();
+        AnalyzeButton = new javax.swing.JButton();
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox5 = new javax.swing.JCheckBox();
+        NumOfLines = new javax.swing.JLabel();
 
         path.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         path.addActionListener(new java.awt.event.ActionListener() {
@@ -89,17 +90,6 @@ public class MainUI extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 49, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 113, Short.MAX_VALUE)
-        );
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
 
@@ -111,64 +101,38 @@ public class MainUI extends javax.swing.JFrame {
             }
         });
 
-        path1.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
-        path1.addActionListener(new java.awt.event.ActionListener() {
+        filNameField.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        filNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                path1ActionPerformed(evt);
+                filNameFieldActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("File Path");
 
-        name.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
-        name.addActionListener(new java.awt.event.ActionListener() {
+        selectedPathField.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        selectedPathField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameActionPerformed(evt);
+                selectedPathFieldActionPerformed(evt);
             }
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("File Name");
 
-        lines.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        lines.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                linesActionPerformed(evt);
-            }
-        });
-
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Number of Lines");
 
-        code.setColumns(20);
-        code.setRows(5);
-        jScrollPane1.setViewportView(code);
+        CodeViewer.setColumns(20);
+        CodeViewer.setRows(5);
+        jScrollPane1.setViewportView(CodeViewer);
 
-        TextResult.setEditable(false);
-        TextResult.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
-        TextResult.addActionListener(new java.awt.event.ActionListener() {
+        AnalyzeButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        AnalyzeButton.setText("Proceed");
+        AnalyzeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextResultActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel5.setText("Complexity of the code:");
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("Table View");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        BtnProceed.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        BtnProceed.setText("Proceed");
-        BtnProceed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnProceedActionPerformed(evt);
+                AnalyzeButtonActionPerformed(evt);
             }
         });
 
@@ -212,172 +176,183 @@ public class MainUI extends javax.swing.JFrame {
             }
         });
 
+        NumOfLines.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        NumOfLines.setText("--");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2)
+                        .addComponent(AnalyzeButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jCheckBox5)
+                                .addComponent(jCheckBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox4)
+                                .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel5)
+                        .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(TextResult, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(NumOfLines))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(path1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lines, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(103, 103, 103)))
-                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox4)
-                                    .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 22, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(browse)
-                                .addGap(20, 20, 20))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(BtnProceed, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(selectedPathField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(browse, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(filNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browse, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(selectedPathField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(path1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(browse, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4)
+                    .addComponent(NumOfLines))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, Short.MAX_VALUE)
-                                .addComponent(jCheckBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCheckBox1)
-                                .addGap(29, 29, 29)
-                                .addComponent(jCheckBox2)
-                                .addGap(26, 26, 26)))
+                        .addComponent(jCheckBox5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBox1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBox2)
+                        .addGap(18, 18, 18)
                         .addComponent(jCheckBox3)
-                        .addGap(27, 27, 27)
-                        .addComponent(jCheckBox4)
-                        .addGap(28, 28, 28))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(lines, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnProceed, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBox4)))
+                .addGap(18, 18, 18)
+                .addComponent(AnalyzeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    static int lineCounter (String path) throws IOException {
+
+    static int lineCounter(String path) throws IOException {
 
         BufferedReader input = new BufferedReader(new FileReader(path));
         int count = 0;
         String line;
-        while ((line = input.readLine()) != null){
-            if(!"".equals(line.trim())){
+        while ((line = input.readLine()) != null) {
+            if (!"".equals(line.trim())) {
                 count++;
             }
         }
         return count;
     }
-    
-    
+
+
     private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        File workingDirectory = new File(System.getProperty("user.dir"));
-        chooser.setCurrentDirectory(workingDirectory);
-        chooser.showOpenDialog(null);
+//        JFileChooser chooser = new JFileChooser();
+//        File workingDirectory = new File(System.getProperty("user.dir"));
+//        chooser.setCurrentDirectory(workingDirectory);
+//        chooser.showOpenDialog(null);
+//
+//        File f = chooser.getSelectedFile();
+//        filepath = f.getAbsolutePath();
+//        String filename = f.getName();
+//        path.setText(filepath);
+//        name.setText(filename);
+//
+//        try {
+//            FileReader reader = new FileReader(filepath);
+//            BufferedReader br = new BufferedReader(reader);
+//            codeArea.read(br, null);
+//            br.close();
+//            codeArea.requestFocus();
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//        try {
+//            int count = lineCounter(filepath);
+//            lines.setText(String.valueOf(count));
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        }
 
-        File f = chooser.getSelectedFile();
-        filepath = f.getAbsolutePath();
-        String filename = f.getName();
-        path.setText(filepath);
-        name.setText(filename);
+        //Selecting the file from file explorer
+        JFileChooser choose = new JFileChooser();
+        File workingDir = new File(System.getProperty("user.dir"));
+        choose.setCurrentDirectory((workingDir));
+        choose.showOpenDialog(null);
 
-       
-        try{
-            FileReader reader = new FileReader(filepath);
-            BufferedReader br = new BufferedReader(reader);
-            code.read(br, null);
-            br.close();
-            code.requestFocus();
+        //Getting the absolute file path and file name to display
+        fl = choose.getSelectedFile();
+        filepath = fl.getAbsolutePath();
+        String flname = fl.getName();
+        selectedPathField.setText((filepath));
+        filNameField.setText(flname);
+        
+//        //Deciding whether if it is a Java file or C++ file
+//        if(filepath.toLowerCase().endsWith(".java"))
+//        {
+//            FileTypeLabel.setText("Java");
+//        }
+//        else if(filepath.toLowerCase().endsWith(".cpp"))
+//        {
+//            FileTypeLabel.setText("C++");
+//        }
+        
+        //Viewing the code in the text area
+        try
+        {
+            read = new FileReader(filepath);
+            br = new BufferedReader(read);
+            CodeViewer.read(br, null);
+            //br.close();
+            CodeViewer.requestFocus();
         }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex);
         }
-        try{
-            int count = lineCounter(filepath);
-            lines.setText(String.valueOf(count));
+        
+        try
+        {
+            int lineCount;
+            lineCount = analit.LineCounter(filepath);
+            NumOfLines.setText(Integer.toString(lineCount));
+            
         }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        
+        //Control Structure Complexity
+        try
+        {
+            anzf.getControlStructureConplexity(filepath);
+        }
+        catch(IOException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex);
         }
 
     }//GEN-LAST:event_browseActionPerformed
@@ -386,39 +361,70 @@ public class MainUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pathActionPerformed
 
-    private void path1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_path1ActionPerformed
+    private void filNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filNameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_path1ActionPerformed
+    }//GEN-LAST:event_filNameFieldActionPerformed
 
-    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
+    private void selectedPathFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedPathFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameActionPerformed
+    }//GEN-LAST:event_selectedPathFieldActionPerformed
 
-    private void linesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_linesActionPerformed
+    private void AnalyzeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalyzeButtonActionPerformed
+        
+        //Adding the code to arraylist
+        ctrl.setStrArr(CodeViewer.getText().split("\\n"));
 
-    private void TextResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextResultActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextResultActionPerformed
+        String filename = fl.getName();
+        CustomFile csFile = new CustomFile(filename);
+        csFile.setFileName(filename);
+        csFile.setFilePath(filepath);
+        fileList.add(csFile);
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         
+        try {
+            //Passing the code to Analyzeform Text Area
+            anzf.getCodeText(filepath);
+        } catch (IOException ex) {
+            Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Calculating the complexity
+        anzf.setVisible(true);
+        
+        //Calculating Code Complexity
+        anzf.getDetails(ctrl.CodeAnalyzer(ctrl.getStrArr()));
+        
+        //Calculating Size Complexity
+        try
+        {
+            anzf.getSizeComplexity(filepath);
+        }
+        catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        
+        //Calculating Number of Variables
+        anzf.getVariableAnalyze(ctrl.KeyWordAnalyzer(ctrl.getStrArr()));
         
         
-        // TODO add your handling code here:
+        //Calculating Inheritance
+        anzf.getInheritanceAnalyzer(ctrl.InheritanceAnalyzer(ctrl.getStrArr()));
         
-     
+        try {
+            anzf.getVariableComplexity(ctrl.getStrArr(),filepath);
+        } catch (IOException ex) {
+            Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        this.toBack();
-        viewtableform newform = new viewtableform();
-        newform.setVisible(true);
-        newform.toFront();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void BtnProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnProceedActionPerformed
-       
-
-    }//GEN-LAST:event_BtnProceedActionPerformed
+        try {
+            //Calculating Method Complexity
+            anzf.getMethodComplexity(filepath);
+        } catch (IOException ex) {
+            Logger.getLogger(MainUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_AnalyzeButtonActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
@@ -430,7 +436,24 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
         // TODO add your handling code here:
-        
+
+        if (evt.getSource() == jCheckBox5) {
+
+            if (jCheckBox5.isSelected() == true) {
+                jCheckBox1.setSelected(true);
+                jCheckBox2.setSelected(true);
+                jCheckBox3.setSelected(true);
+                jCheckBox4.setSelected(true);
+            } else {
+                jCheckBox1.setSelected(false);
+                jCheckBox2.setSelected(false);
+                jCheckBox3.setSelected(false);
+                jCheckBox4.setSelected(false);
+            }
+
+        }
+
+
     }//GEN-LAST:event_jCheckBox5ActionPerformed
 
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
@@ -449,8 +472,7 @@ public class MainUI extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-       
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -473,7 +495,6 @@ public class MainUI extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -494,12 +515,12 @@ public class MainUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnProceed;
-    private javax.swing.JTextField TextResult;
+    private javax.swing.JButton AnalyzeButton;
+    private javax.swing.JTextArea CodeViewer;
+    private javax.swing.JLabel NumOfLines;
     private javax.swing.JButton browse;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextArea code;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTextField filNameField;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
@@ -508,13 +529,9 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField lines;
-    private javax.swing.JTextField name;
     private javax.swing.JTextField path;
-    private javax.swing.JTextField path1;
+    private javax.swing.JTextField selectedPathField;
     // End of variables declaration//GEN-END:variables
 }

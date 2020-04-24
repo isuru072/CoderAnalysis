@@ -5,17 +5,16 @@
  */
 package function;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /**
  *
- * @author Suppa(Maaraya)
+ * @author nuwan
  */
-public class controller {
-       String[] strArr;
+public class Controller_1 {
+    
+    String[] strArr;
     String[] arithmatic = {"+", "-", ".", "/","%"};
     String[] logical = {"&&", "||", "!"};
     String[] relation = {"==", "!=", ">", "<", ">=", "<="};
@@ -256,7 +255,4 @@ public class controller {
         
         
     }
-    
-    
-  
 }

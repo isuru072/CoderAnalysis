@@ -92,8 +92,8 @@ public class AnalyzerForm extends javax.swing.JFrame {
     public void getCodeText(String filepath) throws IOException {
         FileReader read = new FileReader(filepath);
         BufferedReader br = new BufferedReader(read);
-        sizeTextView.read(br, null);
-        sizeTextView.requestFocus();
+        //sizeTextView.read(br, null);
+        //sizeTextView.requestFocus();
     }
 
     public void getSizeComplexity(String filepath) throws Exception {
@@ -163,8 +163,8 @@ public class AnalyzerForm extends javax.swing.JFrame {
     public void getVariableComplexity(String[] str, String filepath) throws FileNotFoundException, IOException {
         FileReader read = new FileReader(filepath);
         BufferedReader br = new BufferedReader(read);
-        CsVariableView.read(br, null);
-        CsVariableView.requestFocus();
+        //CsVariableView.read(br, null);
+        //CsVariableView.requestFocus();
 
         VariableComplexityList = vcm.VariableComplexityInitializer(str);
 
@@ -187,8 +187,8 @@ public class AnalyzerForm extends javax.swing.JFrame {
     public void getControlStructureConplexity(String filepath) throws FileNotFoundException, IOException {
         FileReader read = new FileReader(filepath);
         BufferedReader br = new BufferedReader(read);
-        CcSVariableView.read(br, null);
-        CcSVariableView.requestFocus();
+        //CcSVariableView.read(br, null);
+        //CcSVariableView.requestFocus();
 
         ControlComplexityLst = Ccm.ControlComplexityInitializer(filepath);
 
@@ -222,41 +222,6 @@ public class AnalyzerForm extends javax.swing.JFrame {
         InheritanceLabel = new javax.swing.JLabel();
         SizeLabel = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        CsVariableView = new javax.swing.JTextArea();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        CcSVariableView = new javax.swing.JTextArea();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        sizeTextView = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        CsLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -265,6 +230,8 @@ public class AnalyzerForm extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         WmrtLabel = new javax.swing.JLabel();
         WpdtpLabel = new javax.swing.JLabel();
         NpdtpLabel = new javax.swing.JLabel();
@@ -300,143 +267,121 @@ public class AnalyzerForm extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Number of Inheritance :");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 500, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
 
         ComplexityLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         ComplexityLabel.setText("--");
-        getContentPane().add(ComplexityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 500, -1, -1));
+        getContentPane().add(ComplexityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 280, -1, -1));
 
         KeyWordAnalyzerLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         KeyWordAnalyzerLabel.setText("--");
-        getContentPane().add(KeyWordAnalyzerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, -1, -1));
+        getContentPane().add(KeyWordAnalyzerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel4.setText("Code Complexity :");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 500, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, -1, 30));
 
         InheritanceLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         InheritanceLabel.setText("--");
-        getContentPane().add(InheritanceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, -1, -1));
+        getContentPane().add(InheritanceLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, -1, -1));
 
         SizeLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         SizeLabel.setText("--");
-        getContentPane().add(SizeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, -1, -1));
+        getContentPane().add(SizeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTabbedPane1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jTabbedPane1AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        CsVariableView.setColumns(20);
-        CsVariableView.setRows(5);
-        jScrollPane4.setViewportView(CsVariableView);
+            },
+            new String [] {
+                "Wvs", "Wpdtv", "Npdtv", "Wcdtv", "Ncdtv", "=CV"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
 
-        jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 310));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTable2AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane3.setViewportView(jTable2);
 
-        jLabel24.setText("Ncdtv");
-        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
+        jTabbedPane1.addTab("Variables", jScrollPane3);
 
-        jLabel25.setText("Wcdtv");
-        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, -1));
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel26.setText("Npdtv");
-        jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, -1));
+            },
+            new String [] {
+                "Wtcs", "NC", "Ccspps", "=Ccs"
+            }
+        ));
+        jTable3.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTable3AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane6.setViewportView(jTable3);
 
-        jLabel27.setText("Wpdtv");
-        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
+        jTabbedPane1.addTab("Control Stuctures", jScrollPane6);
 
-        jLabel28.setText("Wvs");
-        jPanel3.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel29.setText("Cv = Wvs [(Wpdtv * Npdtv) + (Wcdtv * Ncdtv)] ");
-        jPanel3.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, -1));
+            },
+            new String [] {
+                "Wkw", "Nkw", "Wid", "Nid", "Wop", "Nop", "Wnv", "Nnv", "Wsl", "Nsl", "=Cs"
+            }
+        ));
+        jTable4.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTable4AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane7.setViewportView(jTable4);
 
-        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel30.setText("Cv");
-        jPanel3.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
+        jTabbedPane1.addTab("Size", jScrollPane7);
 
-        jTabbedPane1.addTab("Variables", jPanel3);
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"}
+            },
+            new String [] {
+                "Nr", "Nmcms", "Nmcmd", "Nmcrms", "Nmcrmd", "Nrmcrms", "Nrmcrmd", "Nrmcms", "Nrmcmd", "Nmrgvs", "Nmrgvd", "Nrmrgvs", "Nrmrgvd", "=Ccp"
+            }
+        ));
+        jScrollPane8.setViewportView(jTable5);
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        CcSVariableView.setColumns(20);
-        CcSVariableView.setRows(5);
-        jScrollPane5.setViewportView(CcSVariableView);
-
-        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 310));
-
-        jLabel31.setText("Ccspps");
-        jPanel4.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, -1, -1));
-
-        jLabel32.setText("NC");
-        jPanel4.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
-
-        jLabel33.setText("Wtcs");
-        jPanel4.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
-
-        jLabel34.setText("Ccs = (Wtcs * NC) + Ccspps ");
-        jPanel4.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, -1));
-
-        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel35.setText("Ccs");
-        jPanel4.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
-
-        jTabbedPane1.addTab("Control Stuctures", jPanel4);
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        sizeTextView.setColumns(20);
-        sizeTextView.setRows(5);
-        jScrollPane2.setViewportView(sizeTextView);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 310));
-
-        jLabel6.setText("Nsl");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
-
-        jLabel7.setText("Wsl");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, -1, -1));
-
-        jLabel8.setText("Nnv");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
-
-        jLabel9.setText("Wnv");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
-
-        jLabel10.setText("Nop");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
-
-        jLabel11.setText("Wop");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
-
-        jLabel12.setText("Nid");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
-
-        jLabel13.setText("Wid");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
-
-        jLabel14.setText("Nkw");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, -1, -1));
-
-        jLabel15.setText("Wkw");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, -1, -1));
-
-        jLabel16.setText("Cs = (Wkw * Nkw) + (Wid * Nid) + (Wop * Nop) + (Wnv * Nnv) + (Wsl * Nsl) ");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
-
-        CsLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        CsLabel1.setText("Cs");
-        jPanel1.add(CsLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, -1, -1));
-
-        jTabbedPane1.addTab("Size", jPanel1);
+        jTabbedPane1.addTab("Couplings", jScrollPane8);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -463,93 +408,7 @@ public class AnalyzerForm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Methods", jScrollPane1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Wvs", "Title 2", "Title 3", "Title 4"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable2.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTable2AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jScrollPane3.setViewportView(jTable2);
-
-        jTabbedPane1.addTab("Variables", jScrollPane3);
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable3.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTable3AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jScrollPane6.setViewportView(jTable3);
-
-        jTabbedPane1.addTab("Control Stuctures", jScrollPane6);
-
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable4.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTable4AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jScrollPane7.setViewportView(jTable4);
-
-        jTabbedPane1.addTab("Size", jScrollPane7);
-
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"0", "1", "0", "1", "2"}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
-            }
-        ));
-        jScrollPane8.setViewportView(jTable5);
-
-        jTabbedPane1.addTab("tab8", jScrollPane8);
-
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 790, 370));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 740, 120));
 
         WmrtLabel.setText("--");
         getContentPane().add(WmrtLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
@@ -599,7 +458,7 @@ public class AnalyzerForm extends javax.swing.JFrame {
 
         CcsLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         CcsLabel.setText("--");
-        getContentPane().add(CcsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
+        getContentPane().add(CcsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
 
         WkwLabel.setText("--");
         getContentPane().add(WkwLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
@@ -614,26 +473,26 @@ public class AnalyzerForm extends javax.swing.JFrame {
         getContentPane().add(NidLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
         WopLabel.setText("--");
-        getContentPane().add(WopLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+        getContentPane().add(WopLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, -1));
 
         NopLabel.setText("--");
-        getContentPane().add(NopLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
+        getContentPane().add(NopLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
 
         WnvLabel.setText("--");
-        getContentPane().add(WnvLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
+        getContentPane().add(WnvLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
 
         NnvLabel.setText("--");
-        getContentPane().add(NnvLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, -1));
+        getContentPane().add(NnvLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
 
         WslLabel.setText("--");
-        getContentPane().add(WslLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
+        getContentPane().add(WslLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, -1));
 
         NslLabel.setText("--");
-        getContentPane().add(NslLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+        getContentPane().add(NslLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, -1, -1));
 
         CsLabelValue.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         CsLabelValue.setText("--");
-        getContentPane().add(CsLabelValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
+        getContentPane().add(CsLabelValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Back");
@@ -642,11 +501,11 @@ public class AnalyzerForm extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 550, 150, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, 150, 60));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
         jLabel3.setText("jLabel3");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 490, 110));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 490, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -765,14 +624,11 @@ public class AnalyzerForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea CcSVariableView;
     private javax.swing.JLabel CcsLabel;
     private javax.swing.JLabel CcsppsLabel;
     private javax.swing.JLabel CmLabel;
     private javax.swing.JLabel ComplexityLabel;
-    private javax.swing.JLabel CsLabel1;
     private javax.swing.JLabel CsLabelValue;
-    private javax.swing.JTextArea CsVariableView;
     private javax.swing.JLabel CvLabel;
     private javax.swing.JLabel InheritanceLabel;
     private javax.swing.JLabel KeyWordAnalyzerLabel;
@@ -800,40 +656,11 @@ public class AnalyzerForm extends javax.swing.JFrame {
     private javax.swing.JLabel WtcsLabel;
     private javax.swing.JLabel WvsLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
@@ -843,6 +670,5 @@ public class AnalyzerForm extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTextArea sizeTextView;
     // End of variables declaration//GEN-END:variables
 }
